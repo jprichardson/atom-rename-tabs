@@ -1,7 +1,7 @@
 {
   "name": "rename-tabs",
   "version": "0.0.0",
-  "description": "Rename tabs on editor open.",
+  "description": "Rename tabs titles with previous directory. Consistent with Sublime Text Editor behavior.",
   "main": "index.js",
   "scripts": {
     "test": "standard"
@@ -13,7 +13,8 @@
   "keywords": [
     "atom",
     "tabs",
-    "rename"
+    "rename",
+    "title"
   ],
   "author": "JP Richardson",
   "license": "MIT",
