@@ -28,6 +28,9 @@ function renameTabs () {
   var names = {}
   var tabs = elements.map(function (el) {
     var name = el.getAttribute('data-name')
+    // don't rename temporary tabs or system tabs (like settings)
+    if (!name) return
+
     names[name] = name in names ? names[name] + 1 : 1
     return {
       name: name,
@@ -35,6 +38,8 @@ function renameTabs () {
       element: el
     }
   })
+  // filter out temps
+  .filter(function (tab) { return tab })
 
   tabs.forEach(function (tab) {
     tab.uniqueName = names[tab.name] === 1
