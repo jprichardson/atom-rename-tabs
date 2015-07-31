@@ -1,6 +1,6 @@
 {
   "name": "rename-tabs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Rename tabs titles with previous directory. Consistent with Sublime Text Editor behavior.",
   "main": "index.js",
   "scripts": {
