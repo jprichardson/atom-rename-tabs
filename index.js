@@ -11,6 +11,9 @@ function activate () {
     _disposables.add(editor.onDidChangePath(renameTabs))
     _disposables.add(editor.onDidChangeTitle(renameTabs))
   }))
+  _disposables.add(atom.workspace.observePanes(function (pane) {
+    _disposables.add(pane.onDidMoveItem(renameTabs))
+  }))
   _disposables.add(atom.workspace.onDidOpen(renameTabs))
 
   // delay in case of refresh
