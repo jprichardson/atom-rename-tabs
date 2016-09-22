@@ -4,6 +4,7 @@
   "description": "Rename tabs titles with previous directory. Consistent with Sublime Text Editor behavior.",
   "main": "index.js",
   "scripts": {
+    "publish": "apm publish --tag TAGNAME",
     "test": "standard"
   },
   "repository": {
