@@ -13,6 +13,7 @@ function activate () {
   }))
   _disposables.add(atom.workspace.observePanes(function (pane) {
     _disposables.add(pane.onDidMoveItem(renameTabs))
+    _disposables.add(pane.onDidActivate(renameTabs))
   }))
   _disposables.add(atom.workspace.onDidOpen(renameTabs))
 
@@ -54,14 +55,23 @@ function renameTabs () {
 
 // todo: allow user to configure this
 function renameTab (tab, tabs) {
-  if (tab.uniqueName) {
-    tab.element.innerText = tab.name
-  } else {
-    var dir = path.dirname(tab.path)
-    var dirs = dir.split(path.sep)
-    var prevDir = dirs[dirs.length - 1]
-    tab.element.innerText = tab.name + ' - ' + prevDir
+  let projectFolder
+
+  // check if tab path in project roots, if so use the project root
+  for (var i = atom.project.rootDirectories.length; i--;) {
+    let rootDir = atom.project.rootDirectories[i]
+    if (tab.path.substr(0, rootDir.path.length) === rootDir.path) {
+      projectFolder = rootDir.path.split(path.sep).pop()
+      break
+    }
   }
+
+  // otherwise, use the file's parent folder
+  if (!projectFolder) {
+    projectFolder = path.dirname(tab.path).split(path.sep).pop()
+  }
+
+  tab.element.innerText = projectFolder + ' — ' + tab.name
 }
 
 module.exports = {
